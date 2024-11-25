@@ -1,0 +1,1 @@
+The aim of this project is to compare the performance of an LLM model in responding to a language-learning prompt without a pre-prompt, with a pre-prompt, and with a pre-prompt and a post-prompt where in each case the LLM's response is graded by an LLM.
