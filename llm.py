@@ -11,16 +11,22 @@ def _run(
     preprompt: str | None = None,
     postprompt: str | None = None,
 ) -> str:
-    # TODO: use the preprompt and postprompt as system prompts and prompt as the user prompt
-
     # Initialize Anthropic client
     client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
-    # Call the API with the prompt
+    # Build messages list starting with any system prompts
+    messages = []
+    if preprompt:
+        messages.append({"role": "system", "content": preprompt})
+    messages.append({"role": "user", "content": prompt})
+    if postprompt:
+        messages.append({"role": "system", "content": postprompt})
+
+    # Call the API with the messages
     message = client.messages.create(
         model="claude-3-haiku-20240307",  # One of their newest and best models
         max_tokens=1024,  # Adjust based on your needs
-        messages=[{"role": "user", "content": prompt}],
+        messages=messages,
     )
     return message.content[0].text
 

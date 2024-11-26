@@ -2,6 +2,7 @@ import llm
 import prompts
 
 
+# TODO: once everything is working, make this bigger at some reasonable number depending on rate limits
 NUM_RUNS = 1
 
 
@@ -10,6 +11,7 @@ def main() -> None:
     _process_data()
 
 
+# TODO: make sure users don't appear to be getting the system prompts info in their responses
 def _gather_data() -> None:
     grade_pre_prompt = prompts.grade()
 
