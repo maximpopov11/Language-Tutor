@@ -1,13 +1,18 @@
 from anthropic import Anthropic
 from dotenv import load_dotenv
 import os
-from typing import Optional
 
 
 load_dotenv()  # Load environment variables from .env file
 
 
-def run(prompt: str) -> str:
+def _run(
+    prompt: str,
+    preprompt: str | None = None,
+    postprompt: str | None = None,
+) -> str:
+    # TODO: use the preprompt and postprompt as system prompts and prompt as the user prompt
+
     # Initialize Anthropic client
     client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
@@ -18,3 +23,11 @@ def run(prompt: str) -> str:
         messages=[{"role": "user", "content": prompt}],
     )
     return message.content[0].text
+
+
+def test(prompt: str, preprompt: str, postprompt: str) -> str:
+    return _run(prompt, preprompt=preprompt, postprompt=postprompt)
+
+
+def grade(prompt: str, preprompt: str) -> str:
+    return _run(prompt, preprompt=preprompt)
