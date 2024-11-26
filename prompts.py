@@ -1,3 +1,3 @@
 def get() -> list[str]:
-    pass
+    return ["What is the capital of France? Please answer in one sentence."]
     # TODO: Implement this
