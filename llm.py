@@ -32,6 +32,7 @@ def _run(
 
 
 def test(prompt: str, preprompt: str, postprompt: str) -> str:
+    # TODO: get our grade from the test response. If it doesn't format it right for us to pull it out, try a few times before asking for the user (person running the code) to step in and fix it if possible, otherwise skip it
     return _run(prompt, preprompt=preprompt, postprompt=postprompt)
 
 

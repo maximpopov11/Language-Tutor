@@ -1,0 +1,8 @@
+Consider this tutor's response to a student's last message.
+
+Are there any grammatical mistakes? What are they?
+How could it be more conversational?
+Is the content of the response accurate? Can you improve it?
+How could the response adapt to the student's level better?
+
+Now, edit the tutor's response to the student that incorporates this feedback.
