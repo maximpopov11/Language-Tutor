@@ -5,7 +5,8 @@ import prompts
 # TODO: manage rate limits, probably write to file with intermediate results
 def main() -> None:
     for prompt in prompts.get():
-        llm.run(prompt)
+        response = llm.run(prompt)
+        print(response)
 
 
 if __name__ == "__main__":
