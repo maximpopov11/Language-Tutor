@@ -11,6 +11,8 @@ def run(
     preprompt: str | None = None,
     postprompt: str | None = None,
 ) -> str:
+    raise RuntimeError("Blocking LLMs calls until ready")  # TODO: unblock when ready
+
     # Initialize Anthropic client
     client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
