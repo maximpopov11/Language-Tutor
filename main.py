@@ -20,7 +20,6 @@ def _gather_data() -> None:
             for test_prompt in prompts.test():
                 for i in NUM_RUNS:
                     # TODO: save results to a file (protect against accidental rerun and overwrite)
-                    # TODO: manage rate limits: 50 requests per minute, or we can batch?
                     response = llm.run(
                         test_prompt, preprompt=pre_prompt, postprompt=post_prompt
                     )

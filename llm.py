@@ -1,7 +1,14 @@
 from anthropic import Anthropic
 from dotenv import load_dotenv
 import os
+import time
 
+# Rate limiting constants
+REQUEST_LIMIT = 50
+TIMEOUT_SECONDS = 60  # 1 minute
+
+# Global request counter
+request_count = REQUEST_LIMIT
 
 load_dotenv()  # Load environment variables from .env file
 
@@ -11,6 +18,15 @@ def run(
     preprompt: str | None = None,
     postprompt: str | None = None,
 ) -> str:
+    global request_count
+
+    # Check and handle rate limiting
+    if request_count <= 0:
+        time.sleep(TIMEOUT_SECONDS)
+        request_count = REQUEST_LIMIT
+
+    request_count -= 1
+
     raise RuntimeError("Blocking LLMs calls until ready")  # TODO: unblock when ready
 
     # Initialize Anthropic client
