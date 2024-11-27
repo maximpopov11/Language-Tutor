@@ -29,7 +29,7 @@ def _gather_data() -> None:
 
 def _process_data() -> None:
     pass
-    # TODO: implement
+    # TODO: implement (check for -1 (manually set) or other illegal grade values)
 
 
 if __name__ == "__main__":
