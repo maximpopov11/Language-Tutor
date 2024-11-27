@@ -6,7 +6,7 @@ import os
 load_dotenv()  # Load environment variables from .env file
 
 
-def _run(
+def run(
     prompt: str,
     preprompt: str | None = None,
     postprompt: str | None = None,
@@ -31,10 +31,6 @@ def _run(
     return message.content[0].text
 
 
-def test(prompt: str, preprompt: str, postprompt: str) -> str:
-    # TODO: get our grade from the test response. If it doesn't format it right for us to pull it out, try a few times before asking for the user (person running the code) to step in and fix it if possible, otherwise skip it
-    return _run(prompt, preprompt=preprompt, postprompt=postprompt)
-
-
 def grade(prompt: str, preprompt: str) -> str:
-    return _run(prompt, preprompt=preprompt)
+    # TODO: get our grade from the test response. If it doesn't format it right for us to pull it out, try a few times before asking for the user (person running the code) to step in and fix it if possible, otherwise skip it
+    return run(prompt, preprompt=preprompt)

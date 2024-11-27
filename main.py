@@ -21,7 +21,9 @@ def _gather_data() -> None:
                 for i in NUM_RUNS:
                     # TODO: save results to a file (protect against accidental rerun and overwrite)
                     # TODO: manage rate limits
-                    response = llm.test(test_prompt, pre_prompt, post_prompt)
+                    response = llm.run(
+                        test_prompt, postprompt=pre_prompt, post_prompt=post_prompt
+                    )
                     grade = llm.grade(response, grade_pre_prompt)
 
 
