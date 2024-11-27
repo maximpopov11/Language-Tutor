@@ -3,9 +3,6 @@ from dotenv import load_dotenv
 import os
 
 
-NUM_RETRIES = 3
-
-
 load_dotenv()  # Load environment variables from .env file
 
 
@@ -35,22 +32,15 @@ def run(
 
 
 def grade(prompt: str, preprompt: str) -> tuple[str, float, float, float, float, float]:
-    # Try up to NUM_RETRIES times to get properly formatted grades
-    for attempt in range(NUM_RETRIES):
-        response = run(prompt, preprompt=preprompt)
+    response = run(prompt, preprompt=preprompt)
 
-        # Try to parse the last line for grades
-        try:
-            last_line = response.strip().split("\n")[-1]
-            grades = [float(grade.strip()) for grade in last_line.split(",")]
+    # Try to parse the last line for grades
+    try:
+        last_line = response.strip().split("\n")[-1]
+        grades = [float(grade.strip()) for grade in last_line.split(",")]
 
-            if len(grades) == 5:  # Expect exactly 5 grades
-                return response, *grades
-        except (ValueError, IndexError):
-            if attempt < 2:  # If not the last attempt
-                continue
-
-            # We will manually fix this later
-            return response, -1, -1, -1, -1, -1
-
-    return response  # Return the last response if all attempts fail
+        if len(grades) == 5:  # Expect exactly 5 grades
+            return response, *grades
+    except (ValueError, IndexError):
+        # We will manually fix this later
+        return response, -1, -1, -1, -1, -1
