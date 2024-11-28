@@ -117,7 +117,7 @@ def grade(
     """Grade response with support for test and dry run modes"""
     if config.mode == "dry_run":
         print(f"DRY RUN: Would grade response: {response[:100]}...")
-        return (5.0, 5.0, 5.0, 5.0, 5.0, 5.0)
+        return ("DRY RUN", 5.0, 5.0, 5.0, 5.0, 5.0)
 
     if config.mode == "test":
         return _generate_test_grade()
