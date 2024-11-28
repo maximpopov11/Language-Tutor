@@ -38,7 +38,7 @@ def set_test_mode(
 
 
 def set_live_run_mode() -> None:
-    """Configure dry run mode"""
+    """Configure live run mode"""
     config.mode = "live"
 
 
