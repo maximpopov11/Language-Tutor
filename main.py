@@ -126,7 +126,6 @@ def _process_data() -> None:
             for i, grade in enumerate(grade_set):
                 if not (1 <= grade <= 10):
                     print(f"\nInvalid grade ({grade}) found for combination {key}")
-                    # TODO: i+1 is suspicious
                     print(f"Component {i + 1} for response:\n{response}")
                     while True:
                         try:
