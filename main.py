@@ -6,7 +6,7 @@ import llm
 import prompts
 
 
-# TODO: [LIVE RUN] increase this number once the live run works
+# TODO: increase this number once the live run works
 NUM_RUNS = 1
 
 # Create constants for directory structure
@@ -28,7 +28,7 @@ def main() -> None:
     _process_data()
 
 
-# TODO: [LIVE RUN] make sure users don't appear to be getting the system prompts info in their responses
+# TODO: make sure users don't appear to be getting the system prompts info in their responses (this is a problem)
 # TODO: We have too many grade not parsed for me to be able to manually go through and check them. That prompt needs to be improved. Post prompting it might help.
 def _ensure_results_dir() -> None:
     """Create results directory if it doesn't exist"""
