@@ -163,7 +163,12 @@ def _process_data() -> None:
         max_grades = [max(g[i] for g in corrected_grades) for i in range(5)]
         avg_grades = [statistics.mean(g[i] for g in corrected_grades) for i in range(5)]
         stddev_grades = [
-            statistics.stdev(g[i] for g in corrected_grades) for i in range(5)
+            (
+                statistics.stdev(g[i] for g in corrected_grades)
+                if len(corrected_grades) > 1
+                else -1
+            )
+            for i in range(5)
         ]
 
         # For the 5th component, use corrected grades and track response indices
