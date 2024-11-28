@@ -9,7 +9,6 @@ import prompts
 NUM_RUNS = 2
 
 # TODO: put these in a directory
-# TODO: grades.txt is not the grade responses
 # File constants
 PRE_PROMPTS_FILE = "pre_prompts_by_id.txt"
 POST_PROMPTS_FILE = "post_prompts_by_id.txt"
