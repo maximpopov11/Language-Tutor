@@ -13,6 +13,8 @@ request_count = REQUEST_LIMIT
 load_dotenv()  # Load environment variables from .env file
 
 
+# TODO: add a dry run mode and test with dummy responses for hitting the happy path
+# TODO: add a test to hit the rate limit and make sure things still go smoothly
 def run(
     prompt: str,
     preprompt: str | None = None,
