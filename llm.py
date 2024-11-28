@@ -13,8 +13,8 @@ request_count = REQUEST_LIMIT
 load_dotenv()  # Load environment variables from .env file
 
 
-# TODO: add a dry run mode and test with dummy responses for hitting the happy path
-# TODO: add a test to hit the rate limit and make sure things still go smoothly
+# TODO: [DRY RUN] add a dry run mode and test with dummy responses for hitting the happy path
+# TODO: [DRY RUN] add a test to hit the rate limit and make sure things still go smoothly
 def run(
     prompt: str,
     preprompt: str | None = None,
@@ -29,7 +29,9 @@ def run(
 
     request_count -= 1
 
-    raise RuntimeError("Blocking LLMs calls until ready")  # TODO: unblock when ready
+    raise RuntimeError(
+        "Blocking LLMs calls until ready"
+    )  # TODO: [WET RUN] unblock when ready
 
     # Initialize Anthropic client
     client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))

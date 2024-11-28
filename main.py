@@ -5,7 +5,7 @@ import llm
 import prompts
 
 
-# TODO: once everything is working, make this bigger at some reasonable number depending on rate limits
+# TODO: [WET RUN] once everything is working, make this bigger at some reasonable number depending on rate limits
 NUM_RUNS = 2
 
 # File constants
@@ -22,8 +22,8 @@ def main() -> None:
     # _process_data()
 
 
-# TODO: make sure users don't appear to be getting the system prompts info in their responses
-# TODO: make sure we don't overwrite file data (num runs 2 should be able to check this)
+# TODO: [WET RUN] make sure users don't appear to be getting the system prompts info in their responses
+# TODO: [WET RUN] make sure we don't overwrite file data (num runs 2 should be able to check this)
 def _gather_data() -> None:
     run_id = 0
 
