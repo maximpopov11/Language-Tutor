@@ -16,7 +16,6 @@ request_count = REQUEST_LIMIT
 load_dotenv()  # Load environment variables from .env file
 
 
-# TODO: [DRY RUN] add a test to hit the rate limit and make sure things still go smoothly
 @dataclass
 class LLMConfig:
     mode: Literal["live", "test", "dry_run"] = "dry_run"

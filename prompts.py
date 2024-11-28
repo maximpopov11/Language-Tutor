@@ -40,13 +40,15 @@ def test() -> list[str]:
 
 
 def pre() -> list[str]:
-    prompts = [_read_prompt(PRE_PROMPTS_FILE)]
+    prompts = [""]
+    prompts.append(_generate_prompt(PRE_PROMPTS_FILE))
     prompts.append(_generate_prompt(PRE_PROMPT_GENERATION_FILE))
     return prompts
 
 
 def post() -> list[str]:
-    prompts = [_read_prompt(POST_PROMPTS_FILE)]
+    prompts = [""]
+    prompts.append(_read_prompt(POST_PROMPTS_FILE))
     prompts.append(_generate_prompt(POST_PROMPT_GENERATION_FILE))
     return prompts
 

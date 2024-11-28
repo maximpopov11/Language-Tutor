@@ -29,7 +29,6 @@ def main() -> None:
 
 
 # TODO: [WET RUN] make sure users don't appear to be getting the system prompts info in their responses
-# TODO: [WET RUN] make sure we don't overwrite file data (num runs 2 should be able to check this)
 def _ensure_results_dir() -> None:
     """Create results directory if it doesn't exist"""
     RESULTS_DIR.mkdir(exist_ok=True)
