@@ -7,7 +7,7 @@ import prompts
 
 
 # TODO: [WET RUN] once everything is working, make this bigger at some reasonable number depending on rate limits
-NUM_RUNS = 2
+NUM_RUNS = 1
 
 # Create constants for directory structure
 ROOT_DIR = Path(__file__).parent
@@ -166,13 +166,17 @@ def _process_data() -> None:
             statistics.stdev(g[i] for g in corrected_grades) for i in range(5)
         ]
 
-        # For the 5th component, use corrected grades
-        fifth_component_responses = [g[4] for g in corrected_grades]
-        min_response = min(fifth_component_responses)
-        max_response = max(fifth_component_responses)
-        avg_response = statistics.mean(fifth_component_responses)
+        # For the 5th component, use corrected grades and track response indices
+        fifth_component_responses = [(g[4], i) for i, g in enumerate(corrected_grades)]
+        min_response_val, min_response_idx = min(
+            fifth_component_responses, key=lambda x: x[0]
+        )
+        max_response_val, max_response_idx = max(
+            fifth_component_responses, key=lambda x: x[0]
+        )
+        avg_response_val = statistics.mean(g[0] for g in fifth_component_responses)
 
-        # Replace the print statements with file writing
+        # Write statistics with response indices
         with open(STATISTICS_FILE, "a") as stats_file:
             stats_file.write(f"Combination {key}:\n")
             stats_file.write(f"  Number of combos: {num_combos}\n")
@@ -180,10 +184,14 @@ def _process_data() -> None:
             stats_file.write(f"  Max grades: {max_grades}\n")
             stats_file.write(f"  Average grades: {avg_grades}\n")
             stats_file.write(f"  Stddev grades: {stddev_grades}\n")
-            stats_file.write(f"  Min response for 5th component: {min_response}\n")
-            stats_file.write(f"  Max response for 5th component: {max_response}\n")
-            stats_file.write(f"  Average response for 5th component: {avg_response}\n")
-            stats_file.write("\n")  # Add blank line between combinations
+            stats_file.write(
+                f"  Min response (grade={min_response_val}, response #{min_response_idx}): {responses[min_response_idx]}\n"
+            )
+            stats_file.write(
+                f"  Max response (grade={max_response_val}, response #{max_response_idx}): {responses[max_response_idx]}\n"
+            )
+            stats_file.write(f"  Average response grade: {avg_response_val}\n")
+            stats_file.write("\n")
 
 
 if __name__ == "__main__":
