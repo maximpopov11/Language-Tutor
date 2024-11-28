@@ -37,9 +37,9 @@ def set_test_mode(
     config.test_grade_components = test_grade_components
 
 
-def set_dry_run_mode() -> None:
+def set_live_run_mode() -> None:
     """Configure dry run mode"""
-    config.mode = "dry_run"
+    config.mode = "live"
 
 
 def _generate_test_response(prompt: str) -> str:
