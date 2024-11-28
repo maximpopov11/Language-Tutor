@@ -19,7 +19,7 @@ GRADE_COMPONENTS_FILE = "grade_components.txt"
 
 def main() -> None:
     _gather_data()
-    _process_data()
+    # _process_data()
 
 
 # TODO: make sure users don't appear to be getting the system prompts info in their responses
@@ -119,14 +119,43 @@ def _process_data() -> None:
         grades = values["grades"]
         responses = values["responses"]
 
-        num_combos = len(grades)
-        min_grades = [min(g[i] for g in grades) for i in range(5)]
-        max_grades = [max(g[i] for g in grades) for i in range(5)]
-        avg_grades = [statistics.mean(g[i] for g in grades) for i in range(5)]
-        stddev_grades = [statistics.stdev(g[i] for g in grades) for i in range(5)]
+        # Check for invalid grades and get user input for corrections
+        corrected_grades = []
+        for grade_set, response in zip(grades, responses):
+            grade_corrections = []
+            for i, grade in enumerate(grade_set):
+                if not (1 <= grade <= 10):
+                    print(f"\nInvalid grade ({grade}) found for combination {key}")
+                    # TODO: i+1 is suspicious
+                    print(f"Component {i + 1} for response:\n{response}")
+                    while True:
+                        try:
+                            new_grade = float(
+                                input(
+                                    f"Please enter a valid grade (1-10) for component {i + 1}: "
+                                )
+                            )
+                            if 1 <= new_grade <= 10:
+                                grade_corrections.append(new_grade)
+                                break
+                            print("Grade must be between 1 and 10")
+                        except ValueError:
+                            print("Please enter a valid number")
+                else:
+                    grade_corrections.append(grade)
+            corrected_grades.append(grade_corrections)
 
-        # For the 5th component, find the actual min, max, and average rated response
-        fifth_component_responses = [g[4] for g in grades]
+        # Use corrected grades for statistics
+        num_combos = len(corrected_grades)
+        min_grades = [min(g[i] for g in corrected_grades) for i in range(5)]
+        max_grades = [max(g[i] for g in corrected_grades) for i in range(5)]
+        avg_grades = [statistics.mean(g[i] for g in corrected_grades) for i in range(5)]
+        stddev_grades = [
+            statistics.stdev(g[i] for g in corrected_grades) for i in range(5)
+        ]
+
+        # For the 5th component, use corrected grades
+        fifth_component_responses = [g[4] for g in corrected_grades]
         min_response = min(fifth_component_responses)
         max_response = max(fifth_component_responses)
         avg_response = statistics.mean(fifth_component_responses)
@@ -140,7 +169,6 @@ def _process_data() -> None:
         print(f"  Min response for 5th component: {min_response}")
         print(f"  Max response for 5th component: {max_response}")
         print(f"  Average response for 5th component: {avg_response}")
-    # TODO: implement (check for -1 (manually set) or other illegal grade values)
 
 
 if __name__ == "__main__":
