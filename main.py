@@ -20,6 +20,7 @@ TEST_PROMPTS_FILE = RESULTS_DIR / "test_prompts_by_id.txt"
 RESPONSES_FILE = RESULTS_DIR / "responses.txt"
 GRADES_FILE = RESULTS_DIR / "grades.txt"
 GRADE_COMPONENTS_FILE = RESULTS_DIR / "grade_components.txt"
+STATISTICS_FILE = RESULTS_DIR / "statistics.txt"
 
 
 def main() -> None:
@@ -172,16 +173,18 @@ def _process_data() -> None:
         max_response = max(fifth_component_responses)
         avg_response = statistics.mean(fifth_component_responses)
 
-        # TODO: there's a lot of info, print to a file
-        print(f"Combination {key}:")
-        print(f"  Number of combos: {num_combos}")
-        print(f"  Min grades: {min_grades}")
-        print(f"  Max grades: {max_grades}")
-        print(f"  Average grades: {avg_grades}")
-        print(f"  Stddev grades: {stddev_grades}")
-        print(f"  Min response for 5th component: {min_response}")
-        print(f"  Max response for 5th component: {max_response}")
-        print(f"  Average response for 5th component: {avg_response}")
+        # Replace the print statements with file writing
+        with open(STATISTICS_FILE, "w") as stats_file:
+            stats_file.write(f"Combination {key}:\n")
+            stats_file.write(f"  Number of combos: {num_combos}\n")
+            stats_file.write(f"  Min grades: {min_grades}\n")
+            stats_file.write(f"  Max grades: {max_grades}\n")
+            stats_file.write(f"  Average grades: {avg_grades}\n")
+            stats_file.write(f"  Stddev grades: {stddev_grades}\n")
+            stats_file.write(f"  Min response for 5th component: {min_response}\n")
+            stats_file.write(f"  Max response for 5th component: {max_response}\n")
+            stats_file.write(f"  Average response for 5th component: {avg_response}\n")
+            stats_file.write("\n")  # Add blank line between combinations
 
 
 if __name__ == "__main__":
