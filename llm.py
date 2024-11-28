@@ -93,6 +93,9 @@ def run(
     # Initialize Anthropic client
     client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
+    if not preprompt:
+        preprompt = ""
+
     # Call the API with the messages
     response = client.messages.create(
         model="claude-3-haiku-20240307",  # One of their newest and best models
@@ -130,7 +133,9 @@ def grade(
 
     # Try to parse the last line for grades
     try:
-        last_line = response.strip().split("\n")[-1]
+        grade_response = run(response, preprompt=grade_prompt)
+
+        last_line = grade_response.strip().split("\n")[-1]
         grades = [float(grade.strip()) for grade in last_line.split(",")]
 
         if len(grades) == 5:  # Expect exactly 5 grades
