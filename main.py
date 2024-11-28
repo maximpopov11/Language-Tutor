@@ -174,7 +174,7 @@ def _process_data() -> None:
         avg_response = statistics.mean(fifth_component_responses)
 
         # Replace the print statements with file writing
-        with open(STATISTICS_FILE, "w") as stats_file:
+        with open(STATISTICS_FILE, "a") as stats_file:
             stats_file.write(f"Combination {key}:\n")
             stats_file.write(f"  Number of combos: {num_combos}\n")
             stats_file.write(f"  Min grades: {min_grades}\n")
