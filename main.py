@@ -160,6 +160,7 @@ def _process_data() -> None:
         max_response = max(fifth_component_responses)
         avg_response = statistics.mean(fifth_component_responses)
 
+        # TODO: there's a lot of info, print to a file
         print(f"Combination {key}:")
         print(f"  Number of combos: {num_combos}")
         print(f"  Min grades: {min_grades}")
