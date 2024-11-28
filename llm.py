@@ -93,6 +93,7 @@ def run(
     # Initialize Anthropic client
     client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
+    # TODO: we crash on giving it a system role
     # Build messages list starting with any system prompts
     messages = []
     if preprompt:

@@ -6,7 +6,7 @@ import llm
 import prompts
 
 
-# TODO: [WET RUN] once everything is working, make this bigger at some reasonable number depending on rate limits
+# TODO: [LIVE RUN] increase this number once the live run works
 NUM_RUNS = 1
 
 # Create constants for directory structure
@@ -28,13 +28,15 @@ def main() -> None:
     _process_data()
 
 
-# TODO: [WET RUN] make sure users don't appear to be getting the system prompts info in their responses
+# TODO: [LIVE RUN] make sure users don't appear to be getting the system prompts info in their responses
 def _ensure_results_dir() -> None:
     """Create results directory if it doesn't exist"""
     RESULTS_DIR.mkdir(exist_ok=True)
 
 
 def _gather_data() -> None:
+    # llm.set_live_run_mode()
+
     # Ensure results directory exists
     _ensure_results_dir()
 
