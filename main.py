@@ -5,9 +5,16 @@ import llm
 import prompts
 
 
-# TODO: consts for file names (in prompts file too)
 # TODO: once everything is working, make this bigger at some reasonable number depending on rate limits
 NUM_RUNS = 2
+
+# File constants
+PRE_PROMPTS_FILE = "pre_prompts_by_id.txt"
+POST_PROMPTS_FILE = "post_prompts_by_id.txt"
+TEST_PROMPTS_FILE = "test_prompts_by_id.txt"
+RESPONSES_FILE = "responses.txt"
+GRADES_FILE = "grades.txt"
+GRADE_COMPONENTS_FILE = "grade_components.txt"
 
 
 def main() -> None:
@@ -26,22 +33,22 @@ def _gather_data() -> None:
     grade_pre_prompt = prompts.grade()
 
     # Write out all prompts with their indices
-    with open("pre_prompts_by_id.txt", "w") as f:
+    with open(PRE_PROMPTS_FILE, "w") as f:
         for i, prompt in enumerate(pre_prompts):
             f.write(f"{i}: {prompt}\n\n")
 
-    with open("post_prompts_by_id.txt", "w") as f:
+    with open(POST_PROMPTS_FILE, "w") as f:
         for i, prompt in enumerate(post_prompts):
             f.write(f"{i}: {prompt}\n\n")
 
-    with open("test_prompts.txt_by_id", "w") as f:
+    with open(TEST_PROMPTS_FILE, "w") as f:
         for i, prompt in enumerate(test_prompts):
             f.write(f"{i}: {prompt}\n\n")
 
     # Create/open files in append mode
-    with open("responses.txt", "a") as resp_file, open(
-        "grades.txt", "a"
-    ) as grade_file, open("grade_components.txt", "a") as components_file:
+    with open(RESPONSES_FILE, "a") as resp_file, open(
+        GRADES_FILE, "a"
+    ) as grade_file, open(GRADE_COMPONENTS_FILE, "a") as components_file:
         for i in range(len(pre_prompts)):
             pre_prompt = pre_prompts[i]
 
@@ -82,7 +89,7 @@ def _process_data() -> None:
     data = {}
 
     # Read the grade components file
-    with open("grade_components.txt", "r") as components_file:
+    with open(GRADE_COMPONENTS_FILE, "r") as components_file:
         for line in components_file:
             # Extract run_id and (i, j, k) from the line
             match = re.match(r"(\d+): \((\d+),(\d+),(\d+)\): (.+)", line)
@@ -98,7 +105,7 @@ def _process_data() -> None:
                 data[key]["grades"].append(grades)
 
     # Read the responses file to get the 5th component's actual response
-    with open("responses.txt", "r") as resp_file:
+    with open(RESPONSES_FILE, "r") as resp_file:
         for line in resp_file:
             match = re.match(r"(\d+): \((\d+),(\d+),(\d+)\): (.+)", line)
             if match:
