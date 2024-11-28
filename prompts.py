@@ -7,9 +7,9 @@ PROMPTS_DIR = Path(__file__).parent / "prompts"
 
 # Input prompt file constants
 TEST_PROMPTS_FILE = "test_prompts.txt"
-PRE_PROMPTS_FILE = "pre_prompts.txt"
+PRE_PROMPTS_FILE = "pre_prompt.txt"
 PRE_PROMPT_GENERATION_FILE = "pre_prompt_generation.txt"
-POST_PROMPTS_FILE = "post_prompts.txt"
+POST_PROMPTS_FILE = "post_prompt.txt"
 POST_PROMPT_GENERATION_FILE = "post_prompt_generation.txt"
 GRADE_PROMPT_FILE = "grade_prompt.txt"
 

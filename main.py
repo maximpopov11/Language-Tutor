@@ -8,6 +8,8 @@ import prompts
 # TODO: [WET RUN] once everything is working, make this bigger at some reasonable number depending on rate limits
 NUM_RUNS = 2
 
+# TODO: put these in a directory
+# TODO: grades.txt is not the grade responses
 # File constants
 PRE_PROMPTS_FILE = "pre_prompts_by_id.txt"
 POST_PROMPTS_FILE = "post_prompts_by_id.txt"
@@ -19,7 +21,7 @@ GRADE_COMPONENTS_FILE = "grade_components.txt"
 
 def main() -> None:
     _gather_data()
-    # _process_data()
+    _process_data()
 
 
 # TODO: [WET RUN] make sure users don't appear to be getting the system prompts info in their responses
