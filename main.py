@@ -1,5 +1,6 @@
 import re
 import statistics
+from pathlib import Path
 
 import llm
 import prompts
@@ -8,14 +9,17 @@ import prompts
 # TODO: [WET RUN] once everything is working, make this bigger at some reasonable number depending on rate limits
 NUM_RUNS = 2
 
-# TODO: put these in a directory
-# File constants
-PRE_PROMPTS_FILE = "pre_prompts_by_id.txt"
-POST_PROMPTS_FILE = "post_prompts_by_id.txt"
-TEST_PROMPTS_FILE = "test_prompts_by_id.txt"
-RESPONSES_FILE = "responses.txt"
-GRADES_FILE = "grades.txt"
-GRADE_COMPONENTS_FILE = "grade_components.txt"
+# Create constants for directory structure
+ROOT_DIR = Path(__file__).parent
+RESULTS_DIR = ROOT_DIR / "results"
+
+# File constants now include the results directory
+PRE_PROMPTS_FILE = RESULTS_DIR / "pre_prompts_by_id.txt"
+POST_PROMPTS_FILE = RESULTS_DIR / "post_prompts_by_id.txt"
+TEST_PROMPTS_FILE = RESULTS_DIR / "test_prompts_by_id.txt"
+RESPONSES_FILE = RESULTS_DIR / "responses.txt"
+GRADES_FILE = RESULTS_DIR / "grades.txt"
+GRADE_COMPONENTS_FILE = RESULTS_DIR / "grade_components.txt"
 
 
 def main() -> None:
@@ -25,7 +29,15 @@ def main() -> None:
 
 # TODO: [WET RUN] make sure users don't appear to be getting the system prompts info in their responses
 # TODO: [WET RUN] make sure we don't overwrite file data (num runs 2 should be able to check this)
+def _ensure_results_dir() -> None:
+    """Create results directory if it doesn't exist"""
+    RESULTS_DIR.mkdir(exist_ok=True)
+
+
 def _gather_data() -> None:
+    # Ensure results directory exists
+    _ensure_results_dir()
+
     run_id = 0
 
     pre_prompts = prompts.pre()
