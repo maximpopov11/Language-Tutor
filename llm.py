@@ -106,7 +106,7 @@ def run(
 
     if postprompt:
         messages = [
-            {"role": "user", "content": response.content[0].text},
+            {"role": "assistant", "content": response.content[0].text},
             {"role": "user", "content": postprompt},
         ]
 
@@ -114,7 +114,7 @@ def run(
             model="claude-3-haiku-20240307",  # One of their newest and best models
             max_tokens=1024,  # Adjust based on your needs
             system=preprompt,
-            messages=[{"role": "user", "content": messages}],
+            messages=messages,
         )
 
     return response.content[0].text
