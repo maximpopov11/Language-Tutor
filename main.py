@@ -1,7 +1,11 @@
+import re
+import statistics
+
 import llm
 import prompts
 
 
+# TODO: consts for file names (in prompts file too)
 # TODO: once everything is working, make this bigger at some reasonable number depending on rate limits
 NUM_RUNS = 2
 
@@ -74,7 +78,61 @@ def _gather_data() -> None:
 
 
 def _process_data() -> None:
-    pass
+    # Dictionary to store data for each (i, j, k) combination
+    data = {}
+
+    # Read the grade components file
+    with open("grade_components.txt", "r") as components_file:
+        for line in components_file:
+            # Extract run_id and (i, j, k) from the line
+            match = re.match(r"(\d+): \((\d+),(\d+),(\d+)\): (.+)", line)
+            if match:
+                run_id, i, j, k, grades_str = match.groups()
+                grades = list(map(float, grades_str.split("\t")))
+
+                # Use (i, j, k) as the key
+                key = (int(i), int(j), int(k))
+                if key not in data:
+                    data[key] = {"grades": [], "responses": []}
+
+                data[key]["grades"].append(grades)
+
+    # Read the responses file to get the 5th component's actual response
+    with open("responses.txt", "r") as resp_file:
+        for line in resp_file:
+            match = re.match(r"(\d+): \((\d+),(\d+),(\d+)\): (.+)", line)
+            if match:
+                run_id, i, j, k, response = match.groups()
+                key = (int(i), int(j), int(k))
+                if key in data:
+                    data[key]["responses"].append(response)
+
+    # Calculate statistics for each (i, j, k) combination
+    for key, values in data.items():
+        grades = values["grades"]
+        responses = values["responses"]
+
+        num_combos = len(grades)
+        min_grades = [min(g[i] for g in grades) for i in range(5)]
+        max_grades = [max(g[i] for g in grades) for i in range(5)]
+        avg_grades = [statistics.mean(g[i] for g in grades) for i in range(5)]
+        stddev_grades = [statistics.stdev(g[i] for g in grades) for i in range(5)]
+
+        # For the 5th component, find the actual min, max, and average rated response
+        fifth_component_responses = [g[4] for g in grades]
+        min_response = min(fifth_component_responses)
+        max_response = max(fifth_component_responses)
+        avg_response = statistics.mean(fifth_component_responses)
+
+        print(f"Combination {key}:")
+        print(f"  Number of combos: {num_combos}")
+        print(f"  Min grades: {min_grades}")
+        print(f"  Max grades: {max_grades}")
+        print(f"  Average grades: {avg_grades}")
+        print(f"  Stddev grades: {stddev_grades}")
+        print(f"  Min response for 5th component: {min_response}")
+        print(f"  Max response for 5th component: {max_response}")
+        print(f"  Average response for 5th component: {avg_response}")
     # TODO: implement (check for -1 (manually set) or other illegal grade values)
 
 
