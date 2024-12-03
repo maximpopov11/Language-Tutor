@@ -49,7 +49,6 @@ def pre() -> list[str]:
 def post() -> list[str]:
     prompts = [""]
     prompts.append(_read_prompt(POST_PROMPTS_FILE))
-    prompts.append(_generate_prompt(POST_PROMPT_GENERATION_FILE))
     return prompts
 
 

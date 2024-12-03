@@ -29,7 +29,7 @@ def main() -> None:
 
 
 # TODO: make sure users don't appear to be getting the system prompts info in their responses (this is a problem)
-# TODO: We have too many grade not parsed for me to be able to manually go through and check them. That prompt needs to be improved. Post prompting it might help.
+# TODO: verify grade prompt is consistently parsable
 def _ensure_results_dir() -> None:
     """Create results directory if it doesn't exist"""
     RESULTS_DIR.mkdir(exist_ok=True)

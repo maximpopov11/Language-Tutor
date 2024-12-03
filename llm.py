@@ -117,6 +117,9 @@ def run(
             messages=messages,
         )
 
+        # Return the part of the response that is contained in the triple quotes
+        return response.content[0].text.split('"""')[1]
+
     return response.content[0].text
 
 

@@ -6,3 +6,7 @@ Is the content of the response accurate? Can you improve it?
 How could the response adapt to the student's level better?
 
 Now, edit the tutor's response to the student that incorporates this feedback.
+For your edited response, provide it in triple quotes, like this:
+"""
+...
+"""
