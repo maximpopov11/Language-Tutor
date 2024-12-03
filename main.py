@@ -6,8 +6,7 @@ import llm
 import prompts
 
 
-# TODO: increase this number once the live run works
-NUM_RUNS = 1
+NUM_RUNS = 90
 
 # Create constants for directory structure
 ROOT_DIR = Path(__file__).parent
@@ -28,15 +27,13 @@ def main() -> None:
     # _process_data()
 
 
-# TODO: make sure users don't appear to be getting the system prompts info in their responses (this is a problem)
-# TODO: verify grade prompt is consistently parsable
 def _ensure_results_dir() -> None:
     """Create results directory if it doesn't exist"""
     RESULTS_DIR.mkdir(exist_ok=True)
 
 
 def _gather_data() -> None:
-    # llm.set_live_run_mode()
+    llm.set_live_run_mode()
 
     # Ensure results directory exists
     _ensure_results_dir()
