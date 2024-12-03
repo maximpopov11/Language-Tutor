@@ -114,8 +114,8 @@ def _process_data() -> None:
                 run_id, i, j, k, grades_str = match.groups()
                 grades = list(map(float, grades_str.split("\t")))
 
-                # Use (i, j, k) as the key
-                key = (int(i), int(j), int(k))
+                # Use (run_id, i, j, k) as the key
+                key = (int(run_id), int(i), int(j), int(k))
                 if key not in data:
                     data[key] = {"grades": [], "responses": []}
 
@@ -124,11 +124,10 @@ def _process_data() -> None:
     # Read the responses file to get the 5th component's actual response
     with open(RESPONSES_FILE, "r") as resp_file:
         for line in resp_file:
-            # TODO: we should do it by response ID here, because the response spans many lines
             match = re.match(r"(\d+): \((\d+),(\d+),(\d+)\): (.+)", line)
             if match:
                 run_id, i, j, k, response = match.groups()
-                key = (int(i), int(j), int(k))
+                key = (int(run_id), int(i), int(j), int(k))
                 if key in data:
                     data[key]["responses"].append(response)
 
