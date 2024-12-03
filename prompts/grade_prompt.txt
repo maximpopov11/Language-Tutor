@@ -10,6 +10,9 @@ grader, so don't be afraid to give low grades if necessary.
 * Overall grade of the response
 
 You are asked to compile your grades by completing your evaluation with the last line thereof containing
-5 comma-separated integers, representing your grade for each of the criteria above in order: gramatical
+5 space-separated integers between 1 and 5, representing your grade for each of the criteria above in order: gramatical
 accuracy, text content accuracy, conversationality, appropriateness of the response to the student's
 language level, and overall grade of the response.
+
+Here is a sample grade response evaluation:
+3 4 2 5 4

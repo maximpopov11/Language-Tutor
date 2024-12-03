@@ -144,18 +144,10 @@ def grade(
     # Try to parse the last line for grades
     try:
         last_line = grade_response.strip().split("\n")[-1]
-        grades = [float(grade.strip()) for grade in last_line.split(",")]
+        grades = [float(grade.strip()) for grade in last_line.split(" ")]
 
         if len(grades) == 5:  # Expect exactly 5 grades 1 - 5
-            # Validate each grade is an integer between 1-5
-            for grade in grades:
-                if not (
-                    isinstance(grade, float) and grade.is_integer() and 1 <= grade <= 5
-                ):
-                    raise ValueError(
-                        f"Grade {grade} must be an integer between 1 and 5"
-                    )
-            return grade_response, *[int(g) for g in grades]
+            return grade_response, *grades
         else:
             raise ValueError(f"Expected 5 grades, got {len(grades)}")
     except (ValueError, IndexError):
