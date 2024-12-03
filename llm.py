@@ -110,15 +110,19 @@ def run(
             {"role": "user", "content": postprompt},
         ]
 
-        response = client.messages.create(
+        post_response = client.messages.create(
             model="claude-3-haiku-20240307",  # One of their newest and best models
             max_tokens=1024,  # Adjust based on your needs
             system=preprompt,
             messages=messages,
         )
 
-        # Return the part of the response that is contained in the triple quotes
-        return response.content[0].text.split('"""')[1]
+        try:
+            # Return the part of the response that is contained in the triple quotes
+            return post_response.content[0].text.split('"""')[1]
+        except IndexError:
+            # ignore the post prompt response if it's not formatted correctly
+            return response.content[0].text
 
     return response.content[0].text
 

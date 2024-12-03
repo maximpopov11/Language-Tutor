@@ -28,6 +28,8 @@ def main() -> None:
     _process_data()
 
 
+# TODO: remove generated prompts, too hard to manage
+# TODO: dry run with bad auto grading
 # TODO: make sure users don't appear to be getting the system prompts info in their responses (this is a problem)
 # TODO: verify grade prompt is consistently parsable
 def _ensure_results_dir() -> None:
