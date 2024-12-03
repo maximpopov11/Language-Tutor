@@ -25,7 +25,7 @@ STATISTICS_FILE = RESULTS_DIR / "statistics.txt"
 
 def main() -> None:
     _gather_data()
-    _process_data()
+    # _process_data()
 
 
 # TODO: make sure users don't appear to be getting the system prompts info in their responses (this is a problem)
