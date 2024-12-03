@@ -79,7 +79,7 @@ def _gather_data() -> None:
                             test_prompt, preprompt=pre_prompt, postprompt=post_prompt
                         )
                         grade, g1, g2, g3, g4, g5 = llm.grade(
-                            response, grade_pre_prompt
+                            test_prompt, response, grade_pre_prompt
                         )
 
                         # Define index once

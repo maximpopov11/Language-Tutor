@@ -121,7 +121,7 @@ def run(
 
 
 def grade(
-    response: str, grade_prompt: str
+    test_prompt: str, response: str, grade_prompt: str
 ) -> tuple[float, float, float, float, float, float]:
     """Grade response with support for test and dry run modes"""
     if config.mode == "dry_run":
@@ -131,15 +131,18 @@ def grade(
     if config.mode == "test":
         return _generate_test_grade()
 
+    subject = f"Task: {grade_prompt}\n\nStudent: {test_prompt}\n\nTutor: {response}"
+    grade_response = run(subject, preprompt=grade_prompt)
+
     # Try to parse the last line for grades
     try:
-        grade_response = run(response, preprompt=grade_prompt)
-
         last_line = grade_response.strip().split("\n")[-1]
         grades = [float(grade.strip()) for grade in last_line.split(",")]
 
         if len(grades) == 5:  # Expect exactly 5 grades
-            return response, *grades
+            return grade_response, *grades
+        else:
+            raise ValueError(f"Expected 5 grades, got {len(grades)}")
     except (ValueError, IndexError):
         # We will manually fix this later
-        return response, -1, -1, -1, -1, -1
+        return grade_response, -1, -1, -1, -1, -1
