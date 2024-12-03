@@ -1,2 +1,0 @@
-Generate a pre-prompt for a French language tutor to help guide the generation of conversational responses 
-to a student who may be at any level of French proficiency.
