@@ -125,11 +125,15 @@ def _process_data() -> None:
         for line in resp_file:
             match = re.match(r"(\d+): \((\d+),(\d+),(\d+)\): (.+)", line)
             if match:
+                # TODO: response is not actually the full response, just the first line of it probably
                 run_id, i, j, k, response = match.groups()
                 key = (int(i), int(j), int(k))
                 run_id = int(run_id)
                 if key in data and run_id in data[key]:
                     data[key][run_id]["responses"] = response
+
+    # Add this at the start of the function
+    strategy_grades = {}  # Will store avg grades for each strategy (i,j,k)
 
     # Calculate statistics for each (i, j, k) combination
     for key, run_id_values in data.items():
@@ -193,6 +197,9 @@ def _process_data() -> None:
                 for i in range(5)
             ]
 
+            # Store the average grades for this strategy
+            strategy_grades[key] = avg_grades
+
             # Write statistics with validity information
             with open(STATISTICS_FILE, "a") as stats_file:
                 stats_file.write(f"Combination {key}:\n")
@@ -216,6 +223,23 @@ def _process_data() -> None:
                 stats_file.write(f"  Invalid components: {invalid_count}\n")
                 stats_file.write(f"  Validity percentage: {validity_percentage:.2f}%\n")
                 stats_file.write(f"  No valid grade sets found\n\n")
+
+    # After the main loop, add ranking logic
+    if strategy_grades:
+        with open(STATISTICS_FILE, "a") as stats_file:
+            stats_file.write("\nStrategy Rankings by Component:\n")
+
+            for component in range(5):
+                stats_file.write(f"\nComponent {component + 1} Rankings:\n")
+                # Sort strategies by their average grade for this component
+                ranked_strategies = sorted(
+                    strategy_grades.items(), key=lambda x: x[1][component], reverse=True
+                )
+
+                for rank, (strategy, grades) in enumerate(ranked_strategies, 1):
+                    stats_file.write(
+                        f"  {rank}. Strategy {strategy}: {grades[component]:.2f}\n"
+                    )
 
 
 def _get_score_from_grades(grades: list[float]) -> float:
