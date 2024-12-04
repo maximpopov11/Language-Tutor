@@ -98,7 +98,8 @@ def _gather_data() -> None:
 
 
 def _process_data() -> None:
-    # Dictionary to store data for each (i, j, k) combination
+    # TODO: figure out how the data should be stored between run ID, input key, and the grade and response correlating to the run ID
+    # Dictionary to store grade and response data by run ID for each (i, j, k) combination
     data = {}
 
     # Read the grade components file
@@ -110,12 +111,15 @@ def _process_data() -> None:
                 run_id, i, j, k, grades_str = match.groups()
                 grades = list(map(float, grades_str.split("\t")))
 
-                # Use (run_id, i, j, k) as the key
-                key = (int(run_id), int(i), int(j), int(k))
+                # Use (i, j, k) as the key and run_id as sub-key
+                key = (int(i), int(j), int(k))
+                run_id = int(run_id)
                 if key not in data:
-                    data[key] = {"grades": [], "responses": []}
+                    data[key] = {}
+                if run_id not in data[key]:
+                    data[key][run_id] = {"grades": None, "responses": None}
 
-                data[key]["grades"].append(grades)
+                data[key][run_id]["grades"] = grades
 
     # Read the responses file to get the 5th component's actual response
     with open(RESPONSES_FILE, "r") as resp_file:
@@ -123,37 +127,57 @@ def _process_data() -> None:
             match = re.match(r"(\d+): \((\d+),(\d+),(\d+)\): (.+)", line)
             if match:
                 run_id, i, j, k, response = match.groups()
-                key = (int(run_id), int(i), int(j), int(k))
-                if key in data:
-                    data[key]["responses"].append(response)
+                key = (int(i), int(j), int(k))
+                run_id = int(run_id)
+                if key in data and run_id in data[key]:
+                    data[key][run_id]["responses"] = response
 
     # Calculate statistics for each (i, j, k) combination
-    for key, values in data.items():
-        grades = values["grades"]
-        responses = values["responses"]
-
+    for key, run_id_values in data.items():
         # Track valid and invalid grades
-        valid_grades = []
+        valid_grades = {}
+        valid_responses = {}
         valid_count = 0
         invalid_count = 0
 
-        for grade_set in grades:
-            valid = True
-            for grade in grade_set:
-                if grade < 1 or grade > 5:
-                    valid = False
-                    break
+        best_response_id = None
+        best_score = -float("inf")
+        worst_response_id = None
+        worst_score = float("inf")
 
-            if valid:
-                valid_grades.append(grade_set)
-                valid_count += 1
-            else:
-                invalid_count += 1
+        for run_id, values in run_id_values.items():
+            grades = values["grades"]
+            responses = values["responses"]
+
+            for grade_set in grades:
+                valid = True
+                for grade in grade_set:
+                    if grade < 1 or grade > 5:
+                        valid = False
+                        break
+
+                if valid:
+                    score = _get_score_from_grades(grade_set)
+                    if score > best_score:
+                        best_score = score
+                        best_response_id = run_id
+                    if score < worst_score:
+                        worst_score = score
+                        worst_response_id = run_id
+
+                    valid_grades[run_id] = grade_set
+                    valid_responses[run_id] = responses
+                    valid_count += 1
+                else:
+                    invalid_count += 1
 
         total_count = valid_count + invalid_count
         validity_percentage = (
             (valid_count / total_count) * 100 if total_count > 0 else -1
         )
+
+        best_response = valid_responses[best_response_id]
+        worst_response = valid_responses[worst_response_id]
 
         # Calculate statistics using only valid grades
         if valid_count > 0:
@@ -169,16 +193,6 @@ def _process_data() -> None:
                 for i in range(5)
             ]
 
-            # For the 5th component, track response indices
-            fifth_component_responses = [(g[4], i) for i, g in enumerate(valid_grades)]
-            min_response_val, min_response_idx = min(
-                fifth_component_responses, key=lambda x: x[0]
-            )
-            max_response_val, max_response_idx = max(
-                fifth_component_responses, key=lambda x: x[0]
-            )
-            avg_response_val = statistics.mean(g[0] for g in fifth_component_responses)
-
             # Write statistics with validity information
             with open(STATISTICS_FILE, "a") as stats_file:
                 stats_file.write(f"Combination {key}:\n")
@@ -190,13 +204,8 @@ def _process_data() -> None:
                 stats_file.write(f"  Max grades: {max_grades}\n")
                 stats_file.write(f"  Average grades: {avg_grades}\n")
                 stats_file.write(f"  Stddev grades: {stddev_grades}\n")
-                stats_file.write(
-                    f"  Min response (grade={min_response_val}, response #{min_response_idx}): {responses[min_response_idx]}\n"
-                )
-                stats_file.write(
-                    f"  Max response (grade={max_response_val}, response #{max_response_idx}): {responses[max_response_idx]}\n"
-                )
-                stats_file.write(f"  Average response grade: {avg_response_val}\n")
+                stats_file.write(f"  Best response: {best_response}\n")
+                stats_file.write(f"  Worst response: {worst_response}\n")
                 stats_file.write("\n")
         else:
             # Write statistics when no valid grade sets exist
@@ -207,6 +216,10 @@ def _process_data() -> None:
                 stats_file.write(f"  Invalid components: {invalid_count}\n")
                 stats_file.write(f"  Validity percentage: {validity_percentage:.2f}%\n")
                 stats_file.write(f"  No valid grade sets found\n\n")
+
+
+def _get_score_from_grades(grades: list[float]) -> float:
+    return 100 * grades[-1] + sum(grades)
 
 
 if __name__ == "__main__":
