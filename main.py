@@ -33,7 +33,7 @@ def _ensure_results_dir() -> None:
 
 
 def _gather_data() -> None:
-    llm.set_live_run_mode()
+    # llm.set_live_run_mode()
 
     # Ensure results directory exists
     _ensure_results_dir()
