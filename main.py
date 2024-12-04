@@ -179,12 +179,14 @@ def _process_data() -> None:
 
         # Calculate statistics using only valid grades
         if valid_count > 0:
-            min_grades = [min(g[i] for g in valid_grades) for i in range(5)]
-            max_grades = [max(g[i] for g in valid_grades) for i in range(5)]
-            avg_grades = [statistics.mean(g[i] for g in valid_grades) for i in range(5)]
+            min_grades = [min(g[i] for g in valid_grades.values()) for i in range(5)]
+            max_grades = [max(g[i] for g in valid_grades.values()) for i in range(5)]
+            avg_grades = [
+                statistics.mean(g[i] for g in valid_grades.values()) for i in range(5)
+            ]
             stddev_grades = [
                 (
-                    statistics.stdev(g[i] for g in valid_grades)
+                    statistics.stdev(g[i] for g in valid_grades.values())
                     if valid_count > 1
                     else -1
                 )
