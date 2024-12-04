@@ -239,50 +239,54 @@ def _process_data() -> None:
                         f"  {rank}. Strategy {strategy}: {grades[component]:.2f}\n"
                     )
 
-            # New section for analyzing individual key components
+            # New section analyzing each grade component separately
             stats_file.write("\nAnalysis by Strategy Components:\n")
 
-            # Group by first component (i)
-            i_averages = {0: [], 1: []}
-            for (i, j, k), grades in strategy_grades.items():
-                i_averages[i].extend(grades)
+            # For each grade component (1-5)
+            for grade_component in range(5):
+                stats_file.write(f"\nGrade Component {grade_component + 1}:\n")
 
-            stats_file.write("\nFirst Component (i) Comparison:\n")
-            i_rankings = sorted(
-                [(i, statistics.mean(grades)) for i, grades in i_averages.items()],
-                key=lambda x: x[1],
-                reverse=True,
-            )
-            for rank, (i, avg) in enumerate(i_rankings, 1):
-                stats_file.write(f"  {rank}. i={i}: {avg:.2f}\n")
+                # Group by first component (i)
+                i_averages = {0: [], 1: []}
+                for (i, j, k), grades in strategy_grades.items():
+                    i_averages[i].append(grades[grade_component])
 
-            # Group by second component (j)
-            j_averages = {0: [], 1: []}
-            for (i, j, k), grades in strategy_grades.items():
-                j_averages[j].extend(grades)
+                stats_file.write("\n  First Component (i) Comparison:\n")
+                i_rankings = sorted(
+                    [(i, statistics.mean(grades)) for i, grades in i_averages.items()],
+                    key=lambda x: x[1],
+                    reverse=True,
+                )
+                for rank, (i, avg) in enumerate(i_rankings, 1):
+                    stats_file.write(f"    {rank}. i={i}: {avg:.2f}\n")
 
-            stats_file.write("\nSecond Component (j) Comparison:\n")
-            j_rankings = sorted(
-                [(j, statistics.mean(grades)) for j, grades in j_averages.items()],
-                key=lambda x: x[1],
-                reverse=True,
-            )
-            for rank, (j, avg) in enumerate(j_rankings, 1):
-                stats_file.write(f"  {rank}. j={j}: {avg:.2f}\n")
+                # Group by second component (j)
+                j_averages = {0: [], 1: []}
+                for (i, j, k), grades in strategy_grades.items():
+                    j_averages[j].append(grades[grade_component])
 
-            # Group by third component (k)
-            k_averages = {0: [], 1: [], 2: []}
-            for (i, j, k), grades in strategy_grades.items():
-                k_averages[k].extend(grades)
+                stats_file.write("\n  Second Component (j) Comparison:\n")
+                j_rankings = sorted(
+                    [(j, statistics.mean(grades)) for j, grades in j_averages.items()],
+                    key=lambda x: x[1],
+                    reverse=True,
+                )
+                for rank, (j, avg) in enumerate(j_rankings, 1):
+                    stats_file.write(f"    {rank}. j={j}: {avg:.2f}\n")
 
-            stats_file.write("\nThird Component (k) Comparison:\n")
-            k_rankings = sorted(
-                [(k, statistics.mean(grades)) for k, grades in k_averages.items()],
-                key=lambda x: x[1],
-                reverse=True,
-            )
-            for rank, (k, avg) in enumerate(k_rankings, 1):
-                stats_file.write(f"  {rank}. k={k}: {avg:.2f}\n")
+                # Group by third component (k)
+                k_averages = {0: [], 1: [], 2: []}
+                for (i, j, k), grades in strategy_grades.items():
+                    k_averages[k].append(grades[grade_component])
+
+                stats_file.write("\n  Third Component (k) Comparison:\n")
+                k_rankings = sorted(
+                    [(k, statistics.mean(grades)) for k, grades in k_averages.items()],
+                    key=lambda x: x[1],
+                    reverse=True,
+                )
+                for rank, (k, avg) in enumerate(k_rankings, 1):
+                    stats_file.write(f"    {rank}. k={k}: {avg:.2f}\n")
 
 
 def _get_score_from_grades(grades: list[float]) -> float:
