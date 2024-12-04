@@ -125,7 +125,6 @@ def _process_data() -> None:
         for line in resp_file:
             match = re.match(r"(\d+): \((\d+),(\d+),(\d+)\): (.+)", line)
             if match:
-                # TODO: response is not actually the full response, just the first line of it probably
                 run_id, i, j, k, response = match.groups()
                 key = (int(i), int(j), int(k))
                 run_id = int(run_id)
@@ -211,8 +210,8 @@ def _process_data() -> None:
                 stats_file.write(f"  Max grades: {max_grades}\n")
                 stats_file.write(f"  Average grades: {avg_grades}\n")
                 stats_file.write(f"  Stddev grades: {stddev_grades}\n")
-                stats_file.write(f"  Best response: {best_response}\n")
-                stats_file.write(f"  Worst response: {worst_response}\n")
+                stats_file.write(f"  Best response ID: {best_response_id}\n")
+                stats_file.write(f"  Worst response ID: {worst_response_id}\n")
                 stats_file.write("\n")
         else:
             # Write statistics when no valid grade sets exist

@@ -1,0 +1,293 @@
+Combination (0, 0, 0):
+  Total components: 100
+  Valid components: 93
+  Invalid components: 7
+  Validity percentage: 93.00%
+  Min grades: [4.0, 4.0, 3.0, 4.0, 4.0]
+  Max grades: [5.0, 5.0, 4.0, 5.0, 5.0]
+  Average grades: [4.010752688172043, 4.462365591397849, 3.4731182795698925, 4.365591397849462, 4.10752688172043]
+  Stddev grades: [0.10369516947304253, 0.5012839988457952, 0.5019829775708744, 0.4842058993534434, 0.311460988952202]
+  Best response ID: 84
+  Worst response ID: 0
+
+Combination (0, 0, 1):
+  Total components: 100
+  Valid components: 89
+  Invalid components: 11
+  Validity percentage: 89.00%
+  Min grades: [3.0, 4.0, 3.0, 4.0, 4.0]
+  Max grades: [4.0, 5.0, 5.0, 5.0, 5.0]
+  Average grades: [3.966292134831461, 4.269662921348314, 3.853932584269663, 4.123595505617978, 4.067415730337078]
+  Stddev grades: [0.18149869785703643, 0.4462990473127607, 0.38584505244253425, 0.3309842319473132, 0.2521612403074291]
+  Best response ID: 96
+  Worst response ID: 164
+
+Combination (0, 0, 2):
+  Total components: 100
+  Valid components: 89
+  Invalid components: 11
+  Validity percentage: 89.00%
+  Min grades: [4.0, 4.0, 3.0, 4.0, 4.0]
+  Max grades: [5.0, 5.0, 5.0, 5.0, 5.0]
+  Average grades: [4.033707865168539, 4.629213483146067, 3.943820224719101, 4.51685393258427, 4.382022471910112]
+  Stddev grades: [0.18149869785703643, 0.4857520521621862, 0.27632122947584004, 0.5025471382359388, 0.4886348789677424]
+  Best response ID: 265
+  Worst response ID: 208
+
+Combination (0, 1, 0):
+  Total components: 100
+  Valid components: 94
+  Invalid components: 6
+  Validity percentage: 94.00%
+  Min grades: [3.0, 4.0, 3.0, 4.0, 4.0]
+  Max grades: [5.0, 5.0, 5.0, 5.0, 5.0]
+  Average grades: [4.0212765957446805, 4.372340425531915, 4.0, 4.404255319148936, 4.202127659574468]
+  Stddev grades: [0.20628424925175867, 0.4860205436870323, 0.43994134506405985, 0.49337871637019504, 0.40374023465117265]
+  Best response ID: 291
+  Worst response ID: 284
+
+Combination (0, 1, 1):
+  Total components: 100
+  Valid components: 83
+  Invalid components: 17
+  Validity percentage: 83.00%
+  Min grades: [2.0, 3.0, 3.0, 2.0, 2.0]
+  Max grades: [4.0, 5.0, 5.0, 5.0, 5.0]
+  Average grades: [3.4819277108433737, 3.9036144578313254, 3.8795180722891565, 3.927710843373494, 3.9156626506024095]
+  Stddev grades: [0.6692085930799252, 0.4309506743130367, 0.36283404663994345, 0.53609092171422, 0.38902063639250567]
+  Best response ID: 423
+  Worst response ID: 431
+
+Combination (0, 1, 2):
+  Total components: 100
+  Valid components: 90
+  Invalid components: 10
+  Validity percentage: 90.00%
+  Min grades: [3.0, 4.0, 3.0, 4.0, 4.0]
+  Max grades: [5.0, 5.0, 5.0, 5.0, 5.0]
+  Average grades: [4.055555555555555, 4.211111111111111, 3.977777777777778, 4.388888888888889, 4.166666666666667]
+  Stddev grades: [0.2748282859651492, 0.4103833353069152, 0.2586819563804248, 0.4902291242441421, 0.3747658444979307]
+  Best response ID: 460
+  Worst response ID: 474
+
+Combination (1, 0, 0):
+  Total components: 100
+  Valid components: 87
+  Invalid components: 13
+  Validity percentage: 87.00%
+  Min grades: [4.0, 4.0, 4.0, 4.0, 4.0]
+  Max grades: [5.0, 5.0, 5.0, 5.0, 5.0]
+  Average grades: [4.367816091954023, 4.781609195402299, 4.413793103448276, 4.804597701149425, 4.67816091954023]
+  Stddev grades: [0.4850064139766639, 0.4155491563098284, 0.4953674731351026, 0.3988087045004804, 0.4698899641990224]
+  Best response ID: 552
+  Worst response ID: 545
+
+Combination (1, 0, 1):
+  Total components: 100
+  Valid components: 92
+  Invalid components: 8
+  Validity percentage: 92.00%
+  Min grades: [3.0, 4.0, 3.0, 4.0, 4.0]
+  Max grades: [4.0, 5.0, 5.0, 5.0, 5.0]
+  Average grades: [3.9347826086956523, 4.206521739130435, 3.9565217391304346, 4.282608695652174, 4.119565217391305]
+  Stddev grades: [0.2482619949886758, 0.4070273765196914, 0.44259582629785704, 0.45273496010290487, 0.32623025995934074]
+  Best response ID: 630
+  Worst response ID: 687
+
+Combination (1, 0, 2):
+  Total components: 110
+  Valid components: 91
+  Invalid components: 19
+  Validity percentage: 82.73%
+  Min grades: [4.0, 4.0, 3.0, 4.0, 4.0]
+  Max grades: [5.0, 5.0, 5.0, 5.0, 5.0]
+  Average grades: [4.054945054945055, 4.681318681318682, 4.010989010989011, 4.615384615384615, 4.406593406593407]
+  Stddev grades: [0.22913544575873132, 0.46854671008984744, 0.18223949410386656, 0.48919959047022854, 0.493919066200166]
+  Best response ID: 762
+  Worst response ID: 776
+
+Combination (1, 1, 0):
+  Total components: 100
+  Valid components: 88
+  Invalid components: 12
+  Validity percentage: 88.00%
+  Min grades: [4.0, 4.0, 4.0, 3.0, 4.0]
+  Max grades: [5.0, 5.0, 5.0, 5.0, 5.0]
+  Average grades: [4.193181818181818, 4.579545454545454, 4.329545454545454, 4.556818181818182, 4.443181818181818]
+  Stddev grades: [0.3970568315514968, 0.4964608284970476, 0.47274184126735436, 0.5436774429424788, 0.49960799680371354]
+  Best response ID: 856
+  Worst response ID: 854
+
+Combination (1, 1, 1):
+  Total components: 100
+  Valid components: 92
+  Invalid components: 8
+  Validity percentage: 92.00%
+  Min grades: [2.0, 2.0, 3.0, 3.0, 3.0]
+  Max grades: [4.0, 5.0, 5.0, 5.0, 5.0]
+  Average grades: [3.782608695652174, 4.010869565217392, 4.0, 4.0978260869565215, 4.032608695652174]
+  Stddev grades: [0.46471276622058694, 0.43208071125840264, 0.4447495899966607, 0.5148302314589541, 0.34612730163126937]
+  Best response ID: 967
+  Worst response ID: 931
+
+Combination (1, 1, 2):
+  Total components: 100
+  Valid components: 93
+  Invalid components: 7
+  Validity percentage: 93.00%
+  Min grades: [4.0, 4.0, 3.0, 4.0, 4.0]
+  Max grades: [5.0, 5.0, 5.0, 5.0, 5.0]
+  Average grades: [4.075268817204301, 4.333333333333333, 4.0, 4.397849462365591, 4.21505376344086]
+  Stddev grades: [0.2652545594323927, 0.4739595775584879, 0.29488391230979427, 0.492106937526453, 0.41308653598066913]
+  Best response ID: 1017
+  Worst response ID: 1023
+
+
+Strategy Rankings by Component:
+
+Component 1 Rankings:
+  1. Strategy (1, 0, 0): 4.37
+  2. Strategy (1, 1, 0): 4.19
+  3. Strategy (1, 1, 2): 4.08
+  4. Strategy (0, 1, 2): 4.06
+  5. Strategy (1, 0, 2): 4.05
+  6. Strategy (0, 0, 2): 4.03
+  7. Strategy (0, 1, 0): 4.02
+  8. Strategy (0, 0, 0): 4.01
+  9. Strategy (0, 0, 1): 3.97
+  10. Strategy (1, 0, 1): 3.93
+  11. Strategy (1, 1, 1): 3.78
+  12. Strategy (0, 1, 1): 3.48
+
+Component 2 Rankings:
+  1. Strategy (1, 0, 0): 4.78
+  2. Strategy (1, 0, 2): 4.68
+  3. Strategy (0, 0, 2): 4.63
+  4. Strategy (1, 1, 0): 4.58
+  5. Strategy (0, 0, 0): 4.46
+  6. Strategy (0, 1, 0): 4.37
+  7. Strategy (1, 1, 2): 4.33
+  8. Strategy (0, 0, 1): 4.27
+  9. Strategy (0, 1, 2): 4.21
+  10. Strategy (1, 0, 1): 4.21
+  11. Strategy (1, 1, 1): 4.01
+  12. Strategy (0, 1, 1): 3.90
+
+Component 3 Rankings:
+  1. Strategy (1, 0, 0): 4.41
+  2. Strategy (1, 1, 0): 4.33
+  3. Strategy (1, 0, 2): 4.01
+  4. Strategy (0, 1, 0): 4.00
+  5. Strategy (1, 1, 1): 4.00
+  6. Strategy (1, 1, 2): 4.00
+  7. Strategy (0, 1, 2): 3.98
+  8. Strategy (1, 0, 1): 3.96
+  9. Strategy (0, 0, 2): 3.94
+  10. Strategy (0, 1, 1): 3.88
+  11. Strategy (0, 0, 1): 3.85
+  12. Strategy (0, 0, 0): 3.47
+
+Component 4 Rankings:
+  1. Strategy (1, 0, 0): 4.80
+  2. Strategy (1, 0, 2): 4.62
+  3. Strategy (1, 1, 0): 4.56
+  4. Strategy (0, 0, 2): 4.52
+  5. Strategy (0, 1, 0): 4.40
+  6. Strategy (1, 1, 2): 4.40
+  7. Strategy (0, 1, 2): 4.39
+  8. Strategy (0, 0, 0): 4.37
+  9. Strategy (1, 0, 1): 4.28
+  10. Strategy (0, 0, 1): 4.12
+  11. Strategy (1, 1, 1): 4.10
+  12. Strategy (0, 1, 1): 3.93
+
+Component 5 Rankings:
+  1. Strategy (1, 0, 0): 4.68
+  2. Strategy (1, 1, 0): 4.44
+  3. Strategy (1, 0, 2): 4.41
+  4. Strategy (0, 0, 2): 4.38
+  5. Strategy (1, 1, 2): 4.22
+  6. Strategy (0, 1, 0): 4.20
+  7. Strategy (0, 1, 2): 4.17
+  8. Strategy (1, 0, 1): 4.12
+  9. Strategy (0, 0, 0): 4.11
+  10. Strategy (0, 0, 1): 4.07
+  11. Strategy (1, 1, 1): 4.03
+  12. Strategy (0, 1, 1): 3.92
+
+Analysis by Strategy Components:
+
+Grade Component 1:
+
+  First Component (i) Comparison:
+    1. i=1: 4.07
+    2. i=0: 3.93
+
+  Second Component (j) Comparison:
+    1. j=0: 4.06
+    2. j=1: 3.93
+
+  Third Component (k) Comparison:
+    1. k=0: 4.15
+    2. k=2: 4.05
+    3. k=1: 3.79
+
+Grade Component 2:
+
+  First Component (i) Comparison:
+    1. i=1: 4.43
+    2. i=0: 4.31
+
+  Second Component (j) Comparison:
+    1. j=0: 4.51
+    2. j=1: 4.24
+
+  Third Component (k) Comparison:
+    1. k=0: 4.55
+    2. k=2: 4.46
+    3. k=1: 4.10
+
+Grade Component 3:
+
+  First Component (i) Comparison:
+    1. i=1: 4.12
+    2. i=0: 3.85
+
+  Second Component (j) Comparison:
+    1. j=1: 4.03
+    2. j=0: 3.94
+
+  Third Component (k) Comparison:
+    1. k=0: 4.05
+    2. k=2: 3.98
+    3. k=1: 3.92
+
+Grade Component 4:
+
+  First Component (i) Comparison:
+    1. i=1: 4.46
+    2. i=0: 4.29
+
+  Second Component (j) Comparison:
+    1. j=0: 4.45
+    2. j=1: 4.30
+
+  Third Component (k) Comparison:
+    1. k=0: 4.53
+    2. k=2: 4.48
+    3. k=1: 4.11
+
+Grade Component 5:
+
+  First Component (i) Comparison:
+    1. i=1: 4.32
+    2. i=0: 4.14
+
+  Second Component (j) Comparison:
+    1. j=0: 4.29
+    2. j=1: 4.16
+
+  Third Component (k) Comparison:
+    1. k=0: 4.36
+    2. k=2: 4.29
+    3. k=1: 4.03
