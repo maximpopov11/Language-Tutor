@@ -98,7 +98,6 @@ def _gather_data() -> None:
 
 
 def _process_data() -> None:
-    # TODO: figure out how the data should be stored between run ID, input key, and the grade and response correlating to the run ID
     # Dictionary to store grade and response data by run ID for each (i, j, k) combination
     data = {}
 
