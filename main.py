@@ -148,27 +148,26 @@ def _process_data() -> None:
             grades = values["grades"]
             responses = values["responses"]
 
-            for grade_set in grades:
-                valid = True
-                for grade in grade_set:
-                    if grade < 1 or grade > 5:
-                        valid = False
-                        break
+            valid = True
+            for grade in grades:
+                if grade < 1 or grade > 5:
+                    valid = False
+                    break
 
-                if valid:
-                    score = _get_score_from_grades(grade_set)
-                    if score > best_score:
-                        best_score = score
-                        best_response_id = run_id
-                    if score < worst_score:
-                        worst_score = score
-                        worst_response_id = run_id
+            if valid:
+                score = _get_score_from_grades(grades)
+                if score > best_score:
+                    best_score = score
+                    best_response_id = run_id
+                if score < worst_score:
+                    worst_score = score
+                    worst_response_id = run_id
 
-                    valid_grades[run_id] = grade_set
-                    valid_responses[run_id] = responses
-                    valid_count += 1
-                else:
-                    invalid_count += 1
+                valid_grades[run_id] = grades
+                valid_responses[run_id] = responses
+                valid_count += 1
+            else:
+                invalid_count += 1
 
         total_count = valid_count + invalid_count
         validity_percentage = (
