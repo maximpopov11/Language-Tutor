@@ -23,8 +23,8 @@ STATISTICS_FILE = RESULTS_DIR / "statistics.txt"
 
 
 def main() -> None:
-    _gather_data()
-    # _process_data()
+    # _gather_data()
+    _process_data()
 
 
 def _ensure_results_dir() -> None:
@@ -132,71 +132,81 @@ def _process_data() -> None:
         grades = values["grades"]
         responses = values["responses"]
 
-        # Check for invalid grades and get user input for corrections
-        corrected_grades = []
-        for grade_set, response in zip(grades, responses):
-            grade_corrections = []
-            for i, grade in enumerate(grade_set):
-                if not (1 <= grade <= 10):
-                    print(f"\nInvalid grade ({grade}) found for combination {key}")
-                    print(f"Component {i + 1} for response:\n{response}")
-                    while True:
-                        try:
-                            new_grade = float(
-                                input(
-                                    f"Please enter a valid grade (1-10) for component {i + 1}: "
-                                )
-                            )
-                            if 1 <= new_grade <= 10:
-                                grade_corrections.append(new_grade)
-                                break
-                            print("Grade must be between 1 and 10")
-                        except ValueError:
-                            print("Please enter a valid number")
-                else:
-                    grade_corrections.append(grade)
-            corrected_grades.append(grade_corrections)
+        # Track valid and invalid grades
+        valid_grades = []
+        valid_count = 0
+        invalid_count = 0
 
-        # Use corrected grades for statistics
-        num_combos = len(corrected_grades)
-        min_grades = [min(g[i] for g in corrected_grades) for i in range(5)]
-        max_grades = [max(g[i] for g in corrected_grades) for i in range(5)]
-        avg_grades = [statistics.mean(g[i] for g in corrected_grades) for i in range(5)]
-        stddev_grades = [
-            (
-                statistics.stdev(g[i] for g in corrected_grades)
-                if len(corrected_grades) > 1
-                else -1
-            )
-            for i in range(5)
-        ]
+        for grade_set in grades:
+            valid = True
+            for grade in grade_set:
+                if grade < 1 or grade > 5:
+                    valid = False
+                    break
 
-        # For the 5th component, use corrected grades and track response indices
-        fifth_component_responses = [(g[4], i) for i, g in enumerate(corrected_grades)]
-        min_response_val, min_response_idx = min(
-            fifth_component_responses, key=lambda x: x[0]
+            if valid:
+                valid_grades.append(grade_set)
+                valid_count += 1
+            else:
+                invalid_count += 1
+
+        total_count = valid_count + invalid_count
+        validity_percentage = (
+            (valid_count / total_count) * 100 if total_count > 0 else -1
         )
-        max_response_val, max_response_idx = max(
-            fifth_component_responses, key=lambda x: x[0]
-        )
-        avg_response_val = statistics.mean(g[0] for g in fifth_component_responses)
 
-        # Write statistics with response indices
-        with open(STATISTICS_FILE, "a") as stats_file:
-            stats_file.write(f"Combination {key}:\n")
-            stats_file.write(f"  Number of combos: {num_combos}\n")
-            stats_file.write(f"  Min grades: {min_grades}\n")
-            stats_file.write(f"  Max grades: {max_grades}\n")
-            stats_file.write(f"  Average grades: {avg_grades}\n")
-            stats_file.write(f"  Stddev grades: {stddev_grades}\n")
-            stats_file.write(
-                f"  Min response (grade={min_response_val}, response #{min_response_idx}): {responses[min_response_idx]}\n"
+        # Calculate statistics using only valid grades
+        if valid_count > 0:
+            min_grades = [min(g[i] for g in valid_grades) for i in range(5)]
+            max_grades = [max(g[i] for g in valid_grades) for i in range(5)]
+            avg_grades = [statistics.mean(g[i] for g in valid_grades) for i in range(5)]
+            stddev_grades = [
+                (
+                    statistics.stdev(g[i] for g in valid_grades)
+                    if valid_count > 1
+                    else -1
+                )
+                for i in range(5)
+            ]
+
+            # For the 5th component, track response indices
+            fifth_component_responses = [(g[4], i) for i, g in enumerate(valid_grades)]
+            min_response_val, min_response_idx = min(
+                fifth_component_responses, key=lambda x: x[0]
             )
-            stats_file.write(
-                f"  Max response (grade={max_response_val}, response #{max_response_idx}): {responses[max_response_idx]}\n"
+            max_response_val, max_response_idx = max(
+                fifth_component_responses, key=lambda x: x[0]
             )
-            stats_file.write(f"  Average response grade: {avg_response_val}\n")
-            stats_file.write("\n")
+            avg_response_val = statistics.mean(g[0] for g in fifth_component_responses)
+
+            # Write statistics with validity information
+            with open(STATISTICS_FILE, "a") as stats_file:
+                stats_file.write(f"Combination {key}:\n")
+                stats_file.write(f"  Total components: {total_count}\n")
+                stats_file.write(f"  Valid components: {valid_count}\n")
+                stats_file.write(f"  Invalid components: {invalid_count}\n")
+                stats_file.write(f"  Validity percentage: {validity_percentage:.2f}%\n")
+                stats_file.write(f"  Min grades: {min_grades}\n")
+                stats_file.write(f"  Max grades: {max_grades}\n")
+                stats_file.write(f"  Average grades: {avg_grades}\n")
+                stats_file.write(f"  Stddev grades: {stddev_grades}\n")
+                stats_file.write(
+                    f"  Min response (grade={min_response_val}, response #{min_response_idx}): {responses[min_response_idx]}\n"
+                )
+                stats_file.write(
+                    f"  Max response (grade={max_response_val}, response #{max_response_idx}): {responses[max_response_idx]}\n"
+                )
+                stats_file.write(f"  Average response grade: {avg_response_val}\n")
+                stats_file.write("\n")
+        else:
+            # Write statistics when no valid grade sets exist
+            with open(STATISTICS_FILE, "a") as stats_file:
+                stats_file.write(f"Combination {key}:\n")
+                stats_file.write(f"  Total components: {total_count}\n")
+                stats_file.write(f"  Valid components: {valid_count}\n")
+                stats_file.write(f"  Invalid components: {invalid_count}\n")
+                stats_file.write(f"  Validity percentage: {validity_percentage:.2f}%\n")
+                stats_file.write(f"  No valid grade sets found\n\n")
 
 
 if __name__ == "__main__":
